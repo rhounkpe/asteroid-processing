@@ -8,10 +8,7 @@ class Asteroid {
   
   // Constructor
   Asteroid() {
-    this.xPos = int(random(width));
-    this.yPos = int(random(height));
-    this.speed = this.randomSpeed();
-    this.sizeOfAsteroids = 60;
+    this.init();
   }
   
   /* 
@@ -36,6 +33,10 @@ class Asteroid {
     return this.yPos;
   }
   
+  public String getLevel() {
+    return this.sizeOfAsteroids == 60 ? "gros" : "petit";
+  }
+  
   // Setters
   public void setXPos(int xPos) {
     this.xPos = xPos;
@@ -45,17 +46,16 @@ class Asteroid {
     this.yPos = yPos;
   }
   
-  // Other methods
-  public int getLevel() {
-    return 0;
-  }
+
   
   /* Initialize an asteroid. Set its position, level ...
     Use the attribut setters as helper methods.
   */
-  public void init(int xPos, int yPos) {
-    this.setXPos(xPos);
-    this.setYPos(yPos);
+  public void init() {
+    this.xPos = int(random(width));
+    this.yPos = int(random(height));
+    this.speed = this.randomSpeed();
+    this.sizeOfAsteroids = 60;
   }
   
   /*
@@ -69,12 +69,45 @@ class Asteroid {
   
   // Return the size of the asteroid
   public int getSizeOfAsteroids() {
-    return 0;
+    return this.sizeOfAsteroids;
   }
   
-  public void updateA(){
-    this.move();
-
+  public void downgradeLevel() {
+    this.sizeOfAsteroids -= 30;
+  }
+  
+  /*
+    If hited twice, the size is egal to zero and then the asteroid is destroid
+  */
+  public boolean isDestroyed() {
+    return this.sizeOfAsteroids <= 0;
+  }
+  
+  public void updateA(){  
+    if(!this.isOutOfWindowHorizontally()) {
+      this.move();
+    }
+    else {
+      if(this.isOutOfWindowByLeft()){
+        this.xPos = width;
+      }
+      else if(this.isOutOfWindowByRight()) {
+        this.xPos = 0;
+      }
+    }
+    
+    if(!this.isOutOfWindowVertically()) {
+      this.move();
+    }
+    else {
+      if(this.isOutOfWindowByTop()) {
+        this.yPos = height;
+      }
+      else if(this.isOutOfWindowByDown()) {
+        this.yPos = 0;
+      }
+    }    
+    
   }
   
   
@@ -103,36 +136,9 @@ class Asteroid {
     return (this.isOutOfWindowByTop() || this.isOutOfWindowByDown());
   }
   
-  public void makeMove() {
+  public void move() {
     this.xPos += this.speed;
     this.yPos += this.speed;
-  }
-  
-  public void move() {
-    if(!this.isOutOfWindowHorizontally()) {
-      this.makeMove();
-    }
-    else {
-      if(this.isOutOfWindowByLeft()){
-        this.xPos = width;
-      }
-      else if(this.isOutOfWindowByRight()) {
-        this.xPos = 0;
-      }
-    }
-    
-    if(!this.isOutOfWindowVertically()) {
-      this.makeMove();
-    }
-    else {
-      if(this.isOutOfWindowByTop()) {
-        this.yPos = height;
-      }
-      else if(this.isOutOfWindowByDown()) {
-        this.yPos = 0;
-      }
-    }
-   
   }
 
   
