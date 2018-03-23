@@ -74,11 +74,66 @@ class Asteroid {
   
   public void updateA(){
     this.move();
+
   }
   
-  public void move() {
+  
+  public boolean isOutOfWindowByLeft() {
+    return (this.xPos < 0 );
+  } 
+  
+  public boolean isOutOfWindowByRight() {
+    return (this.xPos > width );
+  } 
+  
+  
+  public boolean isOutOfWindowByTop() {
+    return (this.yPos < 0 );
+  } 
+  
+  public boolean isOutOfWindowByDown() {
+    return (this.yPos > height );
+  }  
+  
+  public boolean isOutOfWindowHorizontally() {
+    return (this.isOutOfWindowByLeft() || this.isOutOfWindowByRight());
+  }
+  
+  public boolean isOutOfWindowVertically() {
+    return (this.isOutOfWindowByTop() || this.isOutOfWindowByDown());
+  }
+  
+  public void makeMove() {
     this.xPos += this.speed;
     this.yPos += this.speed;
   }
+  
+  public void move() {
+    if(!this.isOutOfWindowHorizontally()) {
+      this.makeMove();
+    }
+    else {
+      if(this.isOutOfWindowByLeft()){
+        this.xPos = width;
+      }
+      else if(this.isOutOfWindowByRight()) {
+        this.xPos = 0;
+      }
+    }
+    
+    if(!this.isOutOfWindowVertically()) {
+      this.makeMove();
+    }
+    else {
+      if(this.isOutOfWindowByTop()) {
+        this.yPos = height;
+      }
+      else if(this.isOutOfWindowByDown()) {
+        this.yPos = 0;
+      }
+    }
+   
+  }
+
   
 }
