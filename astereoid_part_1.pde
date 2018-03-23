@@ -1,6 +1,7 @@
 int NB_AST = 15; //<>//
 
 Asteroid[] asteroids = new Asteroid[NB_AST];
+Ship ship;
 
 void setup() {
   size(1200, 800);
@@ -11,6 +12,8 @@ void setup() {
   for(int i = 0; i < asteroids.length; i++) {
     asteroids[i] = new Asteroid();
   }
+  
+  ship = new Ship();
  
 }
 
@@ -21,5 +24,7 @@ void draw() {
     asteroids[i].drawA();
     asteroids[i].updateA();
   }
+  
+  ship.drawV();
   
 }
