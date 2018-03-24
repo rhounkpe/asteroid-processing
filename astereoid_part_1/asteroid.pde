@@ -3,8 +3,7 @@ class Asteroid {
   int xPos;
   int yPos;
   int speed;
-  int sizeOfAsteroids;
-  
+  int sizeOfAsteroids; 
   
   // Constructor
   Asteroid() {

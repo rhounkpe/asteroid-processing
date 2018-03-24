@@ -26,13 +26,14 @@ void draw() {
   }
   
   ship.drawV();
+  ship.updateProjectils();
   
 }
 
 // On attrape les valeurs passées au clavier
 void keyPressed() {
 
-  //if (key == ' ') createProjectil();
+  if (key == ' ') ship.drawProjectils();
   
   if (keyPressed == false) return;
   

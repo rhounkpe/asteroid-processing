@@ -4,6 +4,9 @@ class Ship {
   int y;
   PImage imageShip;
   int numberOfProjectils;
+  int MAX_P = 10;
+  Projectil projectil;
+  Projectil[] projectils = new Projectil[MAX_P];
   
   // Constructor
   Ship() {
@@ -52,6 +55,24 @@ class Ship {
   public void up() {
     if(this.y > 0) { // // We ensure that the ship will stay in the window
       this.y -= 10;
+    }
+  }
+  
+  public Projectil createProjectil() {
+    return new Projectil(width - 100, this.y);
+  }
+  
+  public void drawProjectils() {
+    for(int i = 0; i < projectils.length; i++){
+      projectils[i] = this.createProjectil();
+    }
+  }
+  
+  public void updateProjectils() {
+    for(int i = 0; i < projectils.length; i++) {
+      if(projectils[i] != null){
+        projectils[i].updateP();
+      }
     }
   }
   
