@@ -28,3 +28,22 @@ void draw() {
   ship.drawV();
   
 }
+
+// On attrape les valeurs passées au clavier
+void keyPressed() {
+
+  //if (key == ' ') createProjectil();
+  
+  if (keyPressed == false) return;
+  
+  if (keyCode == UP)
+  {
+    ship.up();
+  }
+  
+  if (keyCode == DOWN)
+  {
+    ship.down();
+  }
+
+}  
